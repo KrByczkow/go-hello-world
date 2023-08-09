@@ -11,7 +11,7 @@ WORKDIR /app
 RUN apt-get update
 RUN apt-get install -y golang
 
-RUN go build -o bin/hello-world helloWorld
+RUN go build -buildvcs=false -o bin/hello-world helloWorld
 RUN /app/bin/hello-world
 
 
