@@ -1,17 +1,15 @@
 ## Use the container "HelloWorld-test" with the compilers
-FROM ubuntu:latest AS PROC
+FROM golang:1.19 AS PROC
 
-ARG GOROOT="/usr/lib/go-1.18"
+ARG GOROOT="/usr/local/go"
 ARG GOPATH=""
 
-RUN mkdir -p /app /app/bin
-COPY . /app
+RUN git clone https://github.com/KrByczkow/go-hello-world /app
+
+RUN mkdir -p /app/bin
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y golang
-
-RUN go build -buildvcs=false -o bin/hello-world helloWorld
+RUN go build -o bin/hello-world helloWorld
 RUN /app/bin/hello-world
 
 
